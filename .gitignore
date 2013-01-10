@@ -1,0 +1,7 @@
+.project
+settings.xml
+.settings
+bluedragon/*
+WEB-INF/*
+openbddebugger/*
+manual/*
