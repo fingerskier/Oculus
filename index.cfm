@@ -81,21 +81,21 @@
 					</ul>
 					
 					<div ng-controller="AccountCtrl" class="pull-left">
-						<form class="navbar-search" ng-show="!loggedIn()" ng-submit="login()">
-							<input autofocus class="search-query span2" placeholder="Username" type="text">
-							<input type="password" class="search-query span2" placeholder="Password">
+						<form class="form-inline navbar-search" ng-show="!loggedIn()" ng-submit="login()">
+							<input autofocus class="input-small search-query" placeholder="Username" type="text">
+							<input type="password" class="input-small search-query" placeholder="Password">
 							<button type="submit">login</button>
 						</form>
-						<div class="span1" ng-show="loggedIn()">
+						<div class="text-info" ng-show="loggedIn()">
 							Logged in as {{user.fullName}}
 						</div>
 					</div>
 
 					<div ng-controller="StudentCtrl" class="pull-right">
-						<form class="navbar-search" ng-show="loggedIn()" ng-submit="">
-							<select class="search-query span2" ng-change="selectStudent()" ng-model="currentStudent" ng-options="student.name for student in students"></select>
+						<form class="form-inline" ng-show="loggedIn()" ng-submit="">
+							<select class="input-small span2" ng-change="selectStudent()" ng-model="currentStudent" ng-options="student.name for student in students"></select>
 
-							<select class="search-query span2" ng-change="selectSemester()" ng-model="currentSemester" ng-options="semester.name for semester in semesters"></select>
+							<select class="input-small span2" ng-change="selectSemester()" ng-model="currentSemester" ng-options="semester.name for semester in semesters"></select>
 						</form>
 					</div>
 				</div>

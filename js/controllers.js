@@ -33,10 +33,10 @@ function MainCtrl($scope, $route, $routeParams, $location) {
 function StudentCtrl($log, $rootScope, $scope) {
 	$scope.name = "StudentCtrl";
 	$scope.students = [
-		{ID:1, name:'Pete'}, 
-		{ID:2, name:'Chris'},
-		{ID:3, name:'Hannah'},
-		{ID:4, name:'Joe'}
+		{ID:1, name:'Pete Christopher'}, 
+		{ID:2, name:'Chris Johanssen'},
+		{ID:3, name:'Hannah Yacobi'},
+		{ID:4, name:'Joe Schmoe'}
 	];
 	$scope.semesters = [
 		{ID:1, name:'Fall 2011'},
