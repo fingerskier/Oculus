@@ -37,18 +37,37 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#" ng-click="context='view/rootscope.html'">$rootScope</a></li>
-								<li><a href="#" ng-click="context='view/rootscope.html'"></a></li>
+								<li><a href="#" ng-click="context='view/rootscope.html'">Nuther</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								Admin <b class="caret"></b>
 							</a>
+							<ul>
+								<li><a href="#">Dates Settings</a></li>
+								<li><a href="#">Available Assessments</a></li>
+								<li><a href="#">User Accounts</a></li>
+								<li><a href="#">Account Access</a></li>
+								<li><a href="#">Site Settings</a></li>
+								<li><a href="#">Directory</a></li>
+							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								Data <b class="caret"></b>
 							</a>
+							<ul>
+								<li><a href="#">Areas of Study</a></li>
+								<li><a href="#">Courses</a></li>
+								<li><a href="#">CAS</a></li>
+								<li><a href="#">Course Assessments</a></li>
+								<li><a href="#">Learning Settings</a></li>
+								<li><a href="#">Crossover Settings</a></li>
+								<li><a href="#">Learning Relationships</a></li>
+								<li><a href="#">Learning Resources</a></li>
+								<li><a href="#">Funding Descriptions</a></li>
+							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
