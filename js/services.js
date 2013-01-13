@@ -1,24 +1,7 @@
-var CFCuser = function(callback) {
-	var proxy = new UserServiceProxy;
-
-	if (callback) proxy.setCallbackHandler(callback);
-	
-	return proxy;
-}
-
-var CFCjobs = function(callback) {
-	var proxy = new JobsServiceProxy;
-
-	proxy.setCallbackHandler(callback);
-
-	return proxy;
-}
-
-Vision.factory('Account', function($http) {
-	return function() {
-		return {
-			login: $http.get('service/user.cfc?method=login'),
-			logout: $http.get('service/user.cfc?method=logout')
+Vision.factory('User', function($http) {
+	return {
+		login: function(data) {
+			return $http.post('service/user.cfc?method=login', data);
 		}
-	}
+	};
 });
