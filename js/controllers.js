@@ -1,24 +1,43 @@
-function AccountCtrl($scope, $rootScope, $routeParams, $log, User) {
-	$scope.name = "AccountCtrl";
-
+function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 	$scope.login = function() {
-		User
-		.login({
-			username: $scope.username,
-			password: $scope.password
+		$log.info('Account.login');
+		
+		$http.jsonp(API('user', 'login', $scope.username, CryptoJS.MD5($scope.password).toString()))
+		.success(function(response) {
+			$log.info(response);
+			$scope.alerts.push("login successful");
+			if (result.error) {
+				$scope.alerts.push(result.error);
+			} else {
+				$scope.user.fullName = result.fullName;
+				$scope.user.username = result.username;
+				$scope.user.role = result.role;
+			}
 		})
-		.success(function(result) {
-			$rootScope.user.roles = result.roles;
-			$rootScope.user.fullName = result.fullname;
-
-			// $scope.$apply();
-			// $rootScope.$apply();
-
-			$log.info($rootScope.user);
-		})
+		.error(function(response) {
+			$log.info(response);
+			$scope.alerts.push('User.login error');
+		});
+		
+		// User
+		// .login($scope.username, $scope.password)
+		// .then(function(response) {
+		// 	$log.info(response);
+		// 	$scope.alerts.push("login successful");
+		// 	if (result.error) {
+		// 		$scope.alerts.push(result.error);
+		// 	} else {
+		// 		$scope.user.fullName = result.fullName;
+		// 		$scope.user.username = result.username;
+		// 		$scope.user.role = result.role;
+		// 	};
+		// }, function(response) {
+		// 	$log.info(response);
+		// 	$scope.alerts.push('User.login error');
+		// });
 	};
 
-	$scope.logout = function() {		
+	$scope.logout = function() {
 		$rootScope.user = {};
 	};
 
@@ -32,33 +51,6 @@ function AccountCtrl($scope, $rootScope, $routeParams, $log, User) {
 function LoggerCtrl($scope, $log) {
 	// valid states: blank, scheduled, logged, meal
 	// ElemID is only valid for scheduled || logged
-	$scope.name = "MainCtrl";
-	$scope.data = [
-		{time:'07:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'07:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'08:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'08:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'09:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'09:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'10:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'10:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'11:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'11:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'12:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'12:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'13:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'13:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'14:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'14:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'15:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'15:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'16:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'16:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'17:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'17:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'18:00', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]},
-		{time:'18:30', classes:[{elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}, {elemID:0, state:'blank', class:''}]}
-	];
 }
 
 function MainCtrl($scope, $route, $routeParams, $location) {

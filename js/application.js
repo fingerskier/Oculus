@@ -1,33 +1,39 @@
+function jsonp_callback(data) {
+	return data;
+}
+
 var Vision = angular.module('Vision', ['ui'], function($routeProvider, $locationProvider) { });
 
 Vision.config(function($locationProvider, $routeProvider) {
 	$locationProvider.html5Mode(true);
 })
 .run(function($log, $rootScope) {
-	$rootScope.user = {
-		fullName: "",
-		roles: ""
-	};
+	$rootScope.alerts = [];
 	$rootScope.student = {};
 	$rootScope.semester = {};
+	$rootScope.user = {
+		fullName: '',
+		role: '',
+		username: ''
+	};
 
 	$rootScope.loggedIn = function() {
-		return $rootScope.user.roles.length;
+		return $rootScope.user.username.length && $rootScope.user.role.length;
 	};
 	$rootScope.isDev = function() {
-		return $rootScope.user.roles.indexOf('dev') >= 0;
+		return $rootScope.user.role == 'dev';
 	};
 	$rootScope.isAdmin = function() {
-		return $rootScope.user.roles.indexOf('admin') >= 0;
+		return $rootScope.user.role == 'admin';
 	};
 	$rootScope.isRC = function() {
-		return $rootScope.user.roles.indexOf('RC') >= 0;
+		return $rootScope.user.role == 'RC';
 	};
 	$rootScope.isParent = function() {
-		return $rootScope.user.roles.indexOf('parent') >= 0;
+		return $rootScope.user.role == 'parent';
 	};
 	$rootScope.isStudent = function() {
-		return $rootScope.user.roles.indexOf('student') >= 0;
+		return $rootScope.user.role == 'student';
 	};
 
 	$log.info("Oculus started");
