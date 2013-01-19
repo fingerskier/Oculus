@@ -1,7 +1,7 @@
 function API() {
 	var args = Array.prototype.slice.call(arguments);
 
-	return 'http://mesavalleyvision.org/api.cfm/' + args.join('/') + '?callback=jsonp_callback';
+	return 'http://mesavalleyvision.org/api.cfm/' + args.join('/') + '?callback=JSON_CALLBACK';
 }
 
 Vision.service('User', function($http, $log, $rootScope) {

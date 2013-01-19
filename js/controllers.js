@@ -1,40 +1,26 @@
 function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 	$scope.login = function() {
 		$log.info('Account.login');
-		
-		$http.jsonp(API('user', 'login', $scope.username, CryptoJS.MD5($scope.password).toString()))
+
+		User
+		.login($scope.username, $scope.password)
 		.success(function(response) {
 			$log.info(response);
-			$scope.alerts.push("login successful");
-			if (result.error) {
-				$scope.alerts.push(result.error);
+
+			if (response.error) {
+				$scope.alerts.push("login unsuccesful: " + response.error);
 			} else {
-				$scope.user.fullName = result.fullName;
-				$scope.user.username = result.username;
-				$scope.user.role = result.role;
+				$scope.alerts.push("login successful");
+				$rootScope.user.fullName = response.fullName;
+				$rootScope.user.username = response.username;
+				$rootScope.user.role = response.role;
 			}
+			$log.info($rootScope.user);
 		})
 		.error(function(response) {
 			$log.info(response);
-			$scope.alerts.push('User.login error');
+			$scope.alerts.push('login error');
 		});
-		
-		// User
-		// .login($scope.username, $scope.password)
-		// .then(function(response) {
-		// 	$log.info(response);
-		// 	$scope.alerts.push("login successful");
-		// 	if (result.error) {
-		// 		$scope.alerts.push(result.error);
-		// 	} else {
-		// 		$scope.user.fullName = result.fullName;
-		// 		$scope.user.username = result.username;
-		// 		$scope.user.role = result.role;
-		// 	};
-		// }, function(response) {
-		// 	$log.info(response);
-		// 	$scope.alerts.push('User.login error');
-		// });
 	};
 
 	$scope.logout = function() {

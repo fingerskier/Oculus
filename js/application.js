@@ -1,7 +1,3 @@
-function jsonp_callback(data) {
-	return data;
-}
-
 var Vision = angular.module('Vision', ['ui'], function($routeProvider, $locationProvider) { });
 
 Vision.config(function($locationProvider, $routeProvider) {
