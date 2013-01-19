@@ -2,25 +2,7 @@ function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 	$scope.login = function() {
 		$log.info('Account.login');
 
-		User
-		.login($scope.username, $scope.password)
-		.success(function(response) {
-			$log.info(response);
-
-			if (response.error) {
-				$scope.alerts.push("login unsuccesful: " + response.error);
-			} else {
-				$scope.alerts.push("login successful");
-				$rootScope.user.fullName = response.fullName;
-				$rootScope.user.username = response.username;
-				$rootScope.user.role = response.role;
-			}
-			$log.info($rootScope.user);
-		})
-		.error(function(response) {
-			$log.info(response);
-			$scope.alerts.push('login error');
-		});
+		User.login($scope.username, $scope.password);
 	};
 
 	$scope.logout = function() {
@@ -34,30 +16,9 @@ function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 	};
 }
 
-function LoggerCtrl($scope, $log) {
-	// valid states: blank, scheduled, logged, meal
-	// ElemID is only valid for scheduled || logged
-}
-
-function MainCtrl($scope, $route, $routeParams, $location) {
-	$scope.name = "MainCtrl";
-	$scope.context = '';
-}
-
-function StudentCtrl($log, $rootScope, $scope) {
-	$scope.name = "StudentCtrl";
-	$scope.students = [
-		{ID:1, name:'Pete Christopher'}, 
-		{ID:2, name:'Chris Johanssen'},
-		{ID:3, name:'Hannah Yacobi'},
-		{ID:4, name:'Joe Schmoe'}
-	];
-	$scope.semesters = [
-		{ID:1, name:'Fall 2011'},
-		{ID:2, name:'Spring 2012'},
-		{ID:3, name:'Fall 2012'},
-		{ID:4, name:'Spring 2013'}
-	];
+function FinderCtrl($log, $scope) {
+	$scope.students = [];
+	$scope.semesters = [];
 
 	$scope.selectSemester = function() {
 		$log.info('selected semester');
@@ -68,5 +29,28 @@ function StudentCtrl($log, $rootScope, $scope) {
 		$log.info('selected student');
 		//	XHR -> $scope.semesters
 		$rootScope.student = $scope.currentStudent;
+	};
+
+	$scope.$watch('loggedIn', function() {
+		
+	})
+}
+
+function LoggerCtrl($scope, $log) {
+	// valid states: blank, scheduled, logged, meal
+	// ElemID is only valid for scheduled || logged
+}
+
+function MainCtrl($scope, $route, $routeParams, $location) {
+	$scope.name = "MainCtrl";
+	$scope.context = '';
+
+	$scope.alertClass = function(type) {
+		switch (type) {
+			case '': return 'alert-warning';
+			case 'error': return 'alert-error';
+			case 'info': return 'alert-info';
+			case 'success': return 'alert-success';
+		}
 	};
 }

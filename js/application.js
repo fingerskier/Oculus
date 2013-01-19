@@ -5,20 +5,20 @@ Vision.config(function($locationProvider, $routeProvider) {
 })
 .run(function($log, $rootScope) {
 	$rootScope.alerts = [];
-	$rootScope.student = {};
-	$rootScope.semester = {};
+	$rootScope.student = 0;
+	$rootScope.semester = 0;
 	$rootScope.user = {
 		fullName: '',
 		role: '',
 		username: ''
 	};
 
-	$rootScope.loggedIn = function() {
-		return $rootScope.user.username.length && $rootScope.user.role.length;
-	};
-	$rootScope.isDev = function() {
-		return $rootScope.user.role == 'dev';
-	};
+	$rootScope.alert = function(msg, type) {
+		var type = type || '';
+
+		$rootScope.alerts.push({message:msg, type:type});
+	}
+	$rootScope.loggedIn = false;
 	$rootScope.isAdmin = function() {
 		return $rootScope.user.role == 'admin';
 	};

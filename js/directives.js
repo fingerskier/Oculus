@@ -16,5 +16,20 @@ Vision
     } ];
 
     return container;
-}, {}))
-;
+}, {}));
+
+Vision.directive("fadeAfter", function($timeout, $log) {
+    function link($scope, element, attributes) {
+        var expression = attributes.hideAfter;
+        var duration = (attributes.hideAfter || "3000");
+
+        $timeout(function() {
+            element.fadeOut(1000);
+        }, duration);
+    }
+
+    return ({
+        link: link,
+        restrict: "A"
+    });
+});
