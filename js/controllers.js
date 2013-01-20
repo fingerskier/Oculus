@@ -16,24 +16,25 @@ function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 	};
 }
 
-function FinderCtrl($log, $scope) {
-	$scope.students = [];
-	$scope.semesters = [];
-
+function FinderCtrl($log, $scope, Semester, Student) {
 	$scope.selectSemester = function() {
-		$log.info('selected semester');
-		$rootScope.semester = $scope.currentSemester;
+		$log.info('Finder: selected semester');
+		Student.load();
 	};
 
 	$scope.selectStudent = function() {
 		$log.info('selected student');
-		//	XHR -> $scope.semesters
 		$rootScope.student = $scope.currentStudent;
 	};
 
-	$scope.$watch('loggedIn', function() {
-		
-	})
+	$scope.$watch('loggedIn', function(newVal, oldVal) {
+		if (newVal) {
+			Semester.load();
+			$log.info($scope.semesters);
+		}
+	});
+
+	$log.info('Finder loaded');
 }
 
 function LoggerCtrl($scope, $log) {
@@ -47,10 +48,10 @@ function MainCtrl($scope, $route, $routeParams, $location) {
 
 	$scope.alertClass = function(type) {
 		switch (type) {
-			case '': return 'alert-warning';
 			case 'error': return 'alert-error';
 			case 'info': return 'alert-info';
 			case 'success': return 'alert-success';
 		}
+		return 'alert-warning';
 	};
 }

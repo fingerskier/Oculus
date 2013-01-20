@@ -1,5 +1,4 @@
-Vision
-.directive( [ 'focus', 'blur', 'keyup', 'keydown', 'keypress' ].reduce( function ( container, name ) {
+Vision.directive( [ 'focus', 'blur', 'keyup', 'keydown', 'keypress' ].reduce( function ( container, name ) {
     var directiveName = 'ng' + name[ 0 ].toUpperCase( ) + name.substr( 1 );
 
     container[ directiveName ] = [ '$parse', function ( $parse ) {

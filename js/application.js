@@ -1,12 +1,14 @@
-var Vision = angular.module('Vision', ['ui'], function($routeProvider, $locationProvider) { });
+var Vision = angular.module('Vision', ['ngCookies', 'ui'], function($routeProvider, $locationProvider) { });
 
 Vision.config(function($locationProvider, $routeProvider) {
 	$locationProvider.html5Mode(true);
 })
 .run(function($log, $rootScope) {
 	$rootScope.alerts = [];
-	$rootScope.student = 0;
+	$rootScope.semesters = [];
 	$rootScope.semester = 0;
+	$rootScope.students = [];
+	$rootScope.student = 0;
 	$rootScope.user = {
 		fullName: '',
 		role: '',
