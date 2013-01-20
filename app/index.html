@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title></title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="stylesheet" href="styles/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="styles/angular-ui.min.css"/>
+        <link rel="stylesheet" href="styles/bootstrap.min.css"/>
+        <link rel="stylesheet" href="styles/bootstrap-responsive.min.css"/>
+        <link rel="stylesheet" href="styles/darkstrap.css"/>
+        <link rel="stylesheet" href="styles/main.css"/>
+
+    </head>
+    <body ng-app="Vision" ng-controller="MainCtrl">
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+        
+        <!--[if lt IE 9]>
+            <script src="scripts/vendor/es5-shim.min.js"></script>
+            <script src="scripts/vendor/json3.min.js"></script>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div class="navbar navbar-fixed-top navbar-inverse" style="position: absolute;">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="/">Oculus</a>
+                    <ul class="nav">
+                        <li class="dropdown" ng-show="isDev()">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Dev <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="context='view/rootscope.html'">$rootScope</a></li>
+                                <li><a href="#">RC Relations</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-show="isAdmin()">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Admin <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Rollover</a></li>
+                                <li><a href="#">Dates Settings</a></li>
+                                <li><a href="#">Available Assessments</a></li>
+                                <li><a href="#">User Accounts</a></li>
+                                <li><a href="#">Account Access</a></li>
+                                <li><a href="#">Site Settings</a></li>
+                                <li><a href="#">Directory</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-show="isAdmin()">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Data <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Areas of Study</a></li>
+                                <li><a href="#">Courses</a></li>
+                                <li><a href="#">CAS</a></li>
+                                <li><a href="#">Course Assessments</a></li>
+                                <li><a href="#">Learning Settings</a></li>
+                                <li><a href="#">Crossover Settings</a></li>
+                                <li><a href="#">Learning Relationships</a></li>
+                                <li><a href="#">Learning Resources</a></li>
+                                <li><a href="#">Funding Descriptions</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-show="student.ID">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Documents <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="changeContext('ILP')">VILP</a></li>
+                                <li><a href="#">Schedule</a></li>
+                                <li><a href="#" ng-click="changeContext('logger')">Hourly Logs</a></li>
+                                <li ng-show="isRC() || isAdmin() || isDev()"><a href="#">Learner Contacts</a></li>
+                                <li><a href="#" ng-show="isRC() || isAdmin() || isDev()">Grades</a></li>
+                                <li><a href="#" ng-show="isAdmin() || isDev()">Transcript</a></li>
+                                <li><a href="#">Funding Requests</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-show="student.ID">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Attendance</a></li>
+                                <li><a href="#" ng-show="isAdmin() || isDev()">Changes Log</a></li>
+                                <li><a href="#">Funding</a></li>
+                                <li><a href="#">Hourly Logs</a></li>
+                                <li><a href="#">Progress Charts</a></li>
+                                <li><a href="#" ng-show="isRC() || isAdmin() || isDev()">IEPs</a></li>
+                                <li><a href="#">Documentation</a>students w/o VILP or Schedule</li>
+                                <li><a href="#">Orphans</a>students w/o RC or Parent</li>
+                                <li><a href="#">Transcripts</a></li>
+                                <li><a href="#" ng-show="isAdmin() || isDev()">User Log</a></li>
+                                <li><a href="#">VILPs</a></li>
+                                <li><a href="#">Schedules</a></li>
+                                <li><a href="#">Grades</a></li>
+                                <li><a href="#" ng-show="isRC() || isAdmin() || isDev()">Learner Contacts</a></li>
+                                <li><a href="#">Directory</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="container">
+                     <ng-include src="'views/account.html'"></ng-include>
+
+                    <ng-include src="'views/finder.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+        <ul id="alertsContainer">
+            <li class="alert" fade-after="7000" ng-repeat="alert in alerts" ng-class="'alert-'+alert.type">
+                <button class="close" data-dismiss="alert" type="button">&times;</button>
+                <strong>{{alert.type|capitalize}}!</strong> {{alert.message}}
+            </li>
+        </ul>
+        <div ng-include src="context"></div>
+
+        <script src="scripts/vendor/jquery.min.js"></script>
+        <script src="scripts/vendor/jquery-ui.min.js"></script>
+        <script src="scripts/vendor/bootstrap.min.js"></script>
+        <script src="scripts/vendor/angular.min.js"></script>
+        <script src="scripts/vendor/angular-bootstrap.min.js"></script>
+        <script src="scripts/vendor/angular-bootstrap-prettify.min.js"></script>
+        <script src="scripts/vendor/angular-cookies.min.js"></script>
+        <script src="scripts/vendor/angular-loader.min.js"></script>
+        <script src="scripts/vendor/angular-resource.min.js"></script>
+        <script src="scripts/vendor/angular-sanitize.min.js"></script>
+        <script src="scripts/vendor/angular-ui.min.js"></script>
+        <script src="scripts/vendor/angular-ui-ieshiv.min.js"></script>
+        <script src="scripts/vendor/md5.js"></script>
+
+        <!-- build:js scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/controllers/finder.js"></script>
+        <script src="scripts/controllers/ILP.js"></script>
+        <script src="scripts/controllers/logger.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/directives/DOM.js"></script>
+        <script src="scripts/directives/fadeAfter.js"></script>
+        <script src="scripts/filters/capitalize.js"></script>
+        <script src="scripts/filters/reverse.js"></script>
+        <script src="scripts/services/ILP.js"></script>
+        <script src="scripts/services/semester.js"></script>
+        <script src="scripts/services/student.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

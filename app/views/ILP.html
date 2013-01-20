@@ -1,0 +1,36 @@
+<div ng-controller="ILPctrl">
+	<h3>VILP Editor</h3>
+	<h6>{{ILP.LASTTOUCHED|date:'HH:mm M/d/yy'}}</h6>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span2" data-spy="affix" data-offset-top="200">
+				<ul class="nav nav-list">
+					<li><a href="#learnerInfoRow">Learner Info</a></li>
+					<li><a href="#ILPinfoRow">ILP Info</a></li>
+					<li><a href="#class43row">ILP Info</a></li>
+				</ul>
+			</div>
+			<div class="span10" data-spy="scroll" data-target=".nav-list">
+				<div class="row-fluid" id="learnerInfoRow">
+					<h4>Learner Info</h4>
+					<ul>
+						<li>Grade: {{student.grade}}</li>
+						<li>Student ID: {{student.studentNumber}}</li>
+						<li>Address: {{student.address}}<br>{{student.city}}, {{student.state}}<br>{{student.zip}}</li>
+						<li>Email: {{student.email}}</li>
+						<li>Parent/Guardian: {{student.parent}}</li>
+						<li>RC: {{student.RC}}</li>
+					</ul>
+				</div>
+				<div class="row-fluid" id="ILPinfoRow">
+					<h4>ILP Info</h4>
+					{{ILP}}
+				</div>
+				<div class="row-fluid" id="class43row">
+					<h4>Class 1</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ILP}}
+</div>

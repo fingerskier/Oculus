@@ -1,0 +1,10 @@
+<div ng-controller="AccountCtrl" class="pull-left">
+	<form class="form-inline navbar-search" ng-show="!loggedIn" ng-submit="login()">
+		<input autofocus class="input-small search-query" ng-model="username" placeholder="Username" type="text">
+		<input class="input-small search-query" ng-model="password" placeholder="Password" type="password">
+		<button type="submit">login</button>
+	</form>
+	<div class="text-info" ng-show="loggedIn">
+		Logged in as {{user.fullName}} ({{user.role}})
+	</div>
+</div>

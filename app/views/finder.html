@@ -1,0 +1,7 @@
+<div ng-controller="FinderCtrl" class="pull-left">
+	<form class="form-inline" ng-show="loggedIn">
+		<select class="input-small span2" ng-change="selectSemester()" ng-model="semester" ng-options="semester.name for semester in semesters"></select>
+
+		<select class="input-small span2" ng-change="selectStudent()" ng-model="student" ng-options="student.name for student in students" ng-show="semester.ID"></select>
+	</form>
+</div>
