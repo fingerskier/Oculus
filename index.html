@@ -92,9 +92,9 @@
 								Documents <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">VILP</a></li>
+								<li><a href="#" ng-click="changeContext('VILP.html')">VILP</a></li>
 								<li><a href="#">Schedule</a></li>
-								<li><a href="#" ng-click="context='view/logger.html'">Hourly Logs</a></li>
+								<li><a href="#" ng-click="changeContext('view/logger.html')">Hourly Logs</a></li>
 								<li ng-show="isRC() || isAdmin() || isDev()"><a href="#">Learner Contacts</a></li>
 								<li><a href="#" ng-show="isRC() || isAdmin() || isDev()">Grades</a></li>
 								<li><a href="#" ng-show="isAdmin() || isDev()">Transcript</a></li>
@@ -132,17 +132,13 @@
 				</div>
 			</div>
 		</div>
-    	<ul>
+    	<ul id="alertsContainer">
     		<li class="alert" fade-after="7000" ng-repeat="alert in alerts" ng-class="'alert-'+alert.type">
 				<button class="close" data-dismiss="alert" type="button">&times;</button>
 				<strong>{{alert.type|capitalize}}!</strong> {{alert.message}}
 			</li>
     	</ul>
 		<div ng-include src="context"></div>
-		<hr>
-    	Context = {{context}}
-    	{{semester}}
-    	{{student}}
 
 		<script type="text/ng-template" id="account.html">
 			<div ng-controller="AccountCtrl" class="pull-left">
@@ -166,6 +162,13 @@
 					<select class="input-small span2" ng-change="selectStudent()" ng-model="student" ng-options="student.name for student in students" ng-show="semester.ID">
 					</select>
 				</form>
+			</div>
+		</script>
+
+		<script type="text/ng-template" id="VILP.html">
+			<div ng-controller="ILPctrl">
+				<h3>VILP Editor</h3>
+				{{ILP}}
 			</div>
 		</script>
 	</body>

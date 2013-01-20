@@ -20,7 +20,6 @@ Vision.config(function($locationProvider, $routeProvider) {
 
 		$rootScope.alerts.push({message:msg, type:type});
 	}
-	$rootScope.loggedIn = false;
 	$rootScope.isAdmin = function() {
 		return $rootScope.user.role == 'admin';
 	};
@@ -33,6 +32,7 @@ Vision.config(function($locationProvider, $routeProvider) {
 	$rootScope.isStudent = function() {
 		return $rootScope.user.role == 'student';
 	};
+	$rootScope.loggedIn = false;
 	$rootScope.semesterSelected = function() {
 		return $rootScope.semester.ID > 0;
 	}

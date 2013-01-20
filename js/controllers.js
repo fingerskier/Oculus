@@ -40,12 +40,17 @@ function FinderCtrl($log, $scope, Semester, Student) {
 	$log.info('Finder loaded');
 }
 
+function ILPctrl($log, $scope, ILP) {
+	$scope.ILP = ILP.load($scope.semester.ID, $scope.student.ID).data;
+$log.info($scope.ILP);
+}
+
 function LoggerCtrl($scope, $log) {
 	// valid states: blank, scheduled, logged, meal
 	// ElemID is only valid for scheduled || logged
 }
 
-function MainCtrl($scope, $route, $routeParams, $location) {
+function MainCtrl($log, $scope) {
 	$scope.context = '';
 
 	$scope.alertClass = function(type) {
@@ -55,5 +60,9 @@ function MainCtrl($scope, $route, $routeParams, $location) {
 			case 'success': return 'alert-success';
 		}
 		return 'alert-warning';
+	};
+
+	$scope.changeContext = function(newContext) {
+		$scope.context = newContext;
 	};
 }

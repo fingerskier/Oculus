@@ -1,0 +1,11 @@
+#alertsContainer {
+	list-style-type: none;
+	position: fixed;
+	right: 0px;
+	top: 111px;
+}
+
+#alertsContainer li {
+	opacity: 0.66;
+	filter: alpha(opacity=66);
+}

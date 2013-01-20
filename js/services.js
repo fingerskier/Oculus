@@ -1,12 +1,33 @@
-// client: get, set
-// server: create, read, update, delete
+// client: load, set
+// server: create, read, select, update, delete
 function API() {
 	var args = Array.prototype.slice.call(arguments);
 
 	return 'http://mesavalleyvision.org/api.cfm/' + args.join('/') + '?callback=JSON_CALLBACK';
 }
 
-Vision.factory('Semester', function($http, $log, $rootScope) {
+Vision
+.factory('ILP', function($http, $log, $rootScope) {
+	var thisService = {
+		load: function(semesterID, studentID) {
+			$http.jsonp(API('ILP', 'read', semesterID, studentID))
+			.success(function(data, status, headers, config) {
+				$log.info('ILP.load');
+				thisService.data = data;
+				$rootScope.alert('ILP successfully loaded', 'success');
+			})
+			.error(function(data, status, headers, config) {
+				$log.info('ILP.load');
+				$rootScope.alert('Error loading ILP', 'error');
+			});
+
+			return thisService;
+		}
+	}
+
+	return thisService;
+})
+.factory('Semester', function($http, $log, $rootScope) {
 	return {
 		create: function() {},
 		del: function(ID) {
@@ -34,7 +55,7 @@ Vision.factory('Semester', function($http, $log, $rootScope) {
 		},
 		select: function(ID) {
 			$http.jsonp(API('semester', 'select', ID))
-			.success(function() {
+			.success(function(data, status, headers, config) {
 				var S;
 				for (S in $rootScope.semesters)
 					if ($rootScope.semesters[S].ID == ID)
@@ -43,16 +64,15 @@ Vision.factory('Semester', function($http, $log, $rootScope) {
 				$log.info('Semester.select SUCCESS');
 				$rootScope.alert('New semester selected', 'info');
 			})
-			.error(function() {
+			.error(function(data, status, headers, config) {
 				$log.info('Semester.select ERROR');
 				$rootScope.alert('Error selecting semester', 'error');
 			});
 		},
 		update: function(sem) {}
 	};
-});
-
-Vision.factory('Student', function($http, $log, $rootScope) {
+})
+.factory('Student', function($http, $log, $rootScope) {
 	return {
 		load: function(semester) {
 			$log.info('Student.read');
@@ -85,9 +105,8 @@ Vision.factory('Student', function($http, $log, $rootScope) {
 			});
 		}
 	};
-});
-
-Vision.factory('User', function($http, $log, $rootScope) {
+})
+.factory('User', function($http, $log, $rootScope) {
 	return {
 		login: function(username, password) {
 			$log.info('User.login');
