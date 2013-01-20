@@ -87,7 +87,7 @@
 								<li><a href="#">Funding Descriptions</a></li>
 							</ul>
 						</li>
-						<li class="dropdown" ng-show="isLoggedIn">
+						<li class="dropdown" ng-show="student.ID">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								Documents <b class="caret"></b>
 							</a>
@@ -101,7 +101,7 @@
 								<li><a href="#">Funding Requests</a></li>
 							</ul>
 						</li>
-						<li class="dropdown" ng-show="isLoggedIn">
+						<li class="dropdown" ng-show="student.ID">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								Reports <b class="caret"></b>
 							</a>
@@ -132,16 +132,17 @@
 				</div>
 			</div>
 		</div>
-    	<hr>
-    	Context = {{context}}
     	<ul>
     		<li class="alert" fade-after="7000" ng-repeat="alert in alerts" ng-class="'alert-'+alert.type">
 				<button class="close" data-dismiss="alert" type="button">&times;</button>
-				<strong>Alert!</strong> {{alert.message}}
+				<strong>{{alert.type|capitalize}}!</strong> {{alert.message}}
 			</li>
     	</ul>
 		<div ng-include src="context"></div>
 		<hr>
+    	Context = {{context}}
+    	{{semester}}
+    	{{student}}
 
 		<script type="text/ng-template" id="account.html">
 			<div ng-controller="AccountCtrl" class="pull-left">
@@ -162,8 +163,7 @@
 					<select class="input-small span2" ng-change="selectSemester()" ng-model="semester" ng-options="semester.name for semester in semesters">
 					</select>
 
-					<select class="input-small span2" ng-model="student" ng-options="student.name for student in students" ng-show="semesters.length">
-						// <option ng-repeat="student in students" value="{{student.ID}}">{{student.name}}</option>
+					<select class="input-small span2" ng-change="selectStudent()" ng-model="student" ng-options="student.name for student in students" ng-show="semester.ID">
 					</select>
 				</form>
 			</div>

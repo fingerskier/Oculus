@@ -6,9 +6,9 @@ Vision.config(function($locationProvider, $routeProvider) {
 .run(function($log, $rootScope) {
 	$rootScope.alerts = [];
 	$rootScope.semesters = [];
-	$rootScope.semester = 0;
+	$rootScope.semester = {};
 	$rootScope.students = [];
-	$rootScope.student = 0;
+	$rootScope.student = {};
 	$rootScope.user = {
 		fullName: '',
 		role: '',
@@ -16,7 +16,7 @@ Vision.config(function($locationProvider, $routeProvider) {
 	};
 
 	$rootScope.alert = function(msg, type) {
-		var type = type || '';
+		var type = type || 'warning';
 
 		$rootScope.alerts.push({message:msg, type:type});
 	}
@@ -33,6 +33,12 @@ Vision.config(function($locationProvider, $routeProvider) {
 	$rootScope.isStudent = function() {
 		return $rootScope.user.role == 'student';
 	};
+	$rootScope.semesterSelected = function() {
+		return $rootScope.semester.ID > 0;
+	}
+	$rootScope.studentSelected = function() {
+		return $rootScope.student.ID;
+	}
 
 	$log.info("Oculus started");
 });

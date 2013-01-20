@@ -18,13 +18,16 @@ function AccountCtrl($scope, $rootScope, $routeParams, $log, $http, User) {
 
 function FinderCtrl($log, $scope, Semester, Student) {
 	$scope.selectSemester = function() {
-		$log.info('Finder: selected semester');
+		$log.info('Finder.selectSemester');
+		Semester.select($scope.semester.ID);
+		$log.info($scope.semester);
 		Student.load();
 	};
 
 	$scope.selectStudent = function() {
-		$log.info('selected student');
-		$rootScope.student = $scope.currentStudent;
+		$log.info('Finder.selectStudent');
+		Student.select($scope.student.ID);
+		$log.info($scope.student);
 	};
 
 	$scope.$watch('loggedIn', function(newVal, oldVal) {
@@ -43,7 +46,6 @@ function LoggerCtrl($scope, $log) {
 }
 
 function MainCtrl($scope, $route, $routeParams, $location) {
-	$scope.name = "MainCtrl";
 	$scope.context = '';
 
 	$scope.alertClass = function(type) {

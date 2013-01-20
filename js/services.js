@@ -6,6 +6,87 @@ function API() {
 	return 'http://mesavalleyvision.org/api.cfm/' + args.join('/') + '?callback=JSON_CALLBACK';
 }
 
+Vision.factory('Semester', function($http, $log, $rootScope) {
+	return {
+		create: function() {},
+		del: function(ID) {
+			$http.jsonp(API('semester', 'delete', ID))
+			.success(function(data, status, headers, config) {
+				$log.info('Semester.del');
+				// delete local item on XHR success
+				$rootScope.alert('semester deleted', 'info');
+			})
+			.error(function(data, status, headers, config) {
+				$log.info('Semester.del ERROR!');
+				$rootScope.alert('semester delete failed');
+			});
+		},
+		load: function() {
+			$log.info('Semester: read');
+			$http.jsonp(API('semester', 'read'))
+			.success(function(data, status, headers, config) {
+				$rootScope.semesters = data;
+			})
+			.error(function(data, status, headers, config) {
+				$log.info('Semester: read ERROR!');
+				$rootScope.alert('Semester.load ERROR!', 'error');
+			});
+		},
+		select: function(ID) {
+			$http.jsonp(API('semester', 'select', ID))
+			.success(function() {
+				var S;
+				for (S in $rootScope.semesters)
+					if ($rootScope.semesters[S].ID == ID)
+						$rootScope.semester = $rootScope.semesters[S];
+
+				$log.info('Semester.select SUCCESS');
+				$rootScope.alert('New semester selected', 'info');
+			})
+			.error(function() {
+				$log.info('Semester.select ERROR');
+				$rootScope.alert('Error selecting semester', 'error');
+			});
+		},
+		update: function(sem) {}
+	};
+});
+
+Vision.factory('Student', function($http, $log, $rootScope) {
+	return {
+		load: function(semester) {
+			$log.info('Student.read');
+
+			$http.jsonp(API('student', 'read'))
+			.success(function(data, status, headers, config) {
+				$log.info('Student.load SUCCESS');
+				$rootScope.students = data;
+			})
+			.error(function(data, status, headers, config) {
+				$log.info('Student.load ERROR');
+				$rootScope.alert('Error loading students');
+			});
+		},
+		select: function(ID) {
+			$log.info('Student.select');
+			$http.jsonp(API('student', 'select', ID))
+			.success(function() {
+				var S;
+				for (S in $rootScope.students)
+					if ($rootScope.students[S].ID == ID)
+						$rootScope.student = $rootScope.students[S];
+
+				$log.info('Student.select SUCCESS');
+				$rootScope.alert('Student loaded successfully', 'success');
+			})
+			.error(function() {
+				$log.info('Student.select ERROR');
+				$rootScope.alert('Error loading student', 'error');
+			});
+		}
+	};
+});
+
 Vision.factory('User', function($http, $log, $rootScope) {
 	return {
 		login: function(username, password) {
@@ -33,54 +114,4 @@ Vision.factory('User', function($http, $log, $rootScope) {
 			// if we decide to use cookies (probable) then we'll implement this
 		}
 	}
-});
-
-Vision.factory('Student', function($http, $log, $rootScope) {
-	return {
-		load: function(semester) {
-			$log.info('Student.read');
-
-			$http.jsonp(API('student', 'read'))
-			.success(function(data, status, headers, config) {
-				$log.info('Student.load SUCCESS');
-				$rootScope.students = data;
-			})
-			.error(function(data, status, headers, config) {
-				$log.info('Student.load ERROR');
-				// body...
-			});
-		}
-	}
-});
-
-
-Vision.factory('Semester', function($http, $log, $rootScope) {
-	return {
-		create: function() {},
-		del: function(ID) {
-			$http.jsonp(API('semester', 'delete', ID))
-			.success(function(data, status, headers, config) {
-				$log.info('Semester: delete');
-				// delete local item on XHR success
-				$rootScope.alert('semester deleted', 'info');
-			})
-			.error(function(data, status, headers, config) {
-				$log.info('Semester: delete ERROR!');
-				$rootScope.alert('semester delete failed');
-			});
-		},
-		load: function() {
-			$log.info('Semester: read');
-			$http.jsonp(API('semester', 'read'))
-			.success(function(data, status, headers, config) {
-				$rootScope.semesters = data;
-				$rootScope.alert('semesters loaded', 'success');
-			})
-			.error(function(data, status, headers, config) {
-				$log.info('Semester: read ERROR!');
-				$rootScope.alert('Semester.read ERROR!', 'error');
-			});
-		},
-		update: function(sem) {}
-	};
 });
