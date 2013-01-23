@@ -4,21 +4,31 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="stylesheet" href="styles/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="styles/angular-ui.min.css"/>
+        <link rel="stylesheet" href="styles/bootstrap.min.css"/>
+        <link rel="stylesheet" href="styles/bootstrap-responsive.min.css"/>
+        <link rel="stylesheet" href="styles/darkstrap.css"/>
+        <link rel="stylesheet" href="styles/main.css"/>
 
-        <link rel="stylesheet" href="styles/main.css">
-        <script src="scripts/vendor/modernizr.min.js"></script>
     </head>
-
     <body ng-app="Vision" ng-controller="MainCtrl">
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
+        
+        <!--[if lt IE 9]>
+            <script src="scripts/vendor/es5-shim.min.js"></script>
+            <script src="scripts/vendor/json3.min.js"></script>
+        <![endif]-->
 
+        <!-- Add your site or application content here -->
         <div class="navbar navbar-fixed-top navbar-inverse" style="position: absolute;">
             <div class="navbar-inner">
                 <div class="container">
@@ -116,37 +126,10 @@
         </ul>
         <div ng-include src="context"></div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    
-        <!-- build:js scripts/core.js -->
         <script src="scripts/vendor/jquery.min.js"></script>
         <script src="scripts/vendor/jquery-ui.min.js"></script>
         <script src="scripts/vendor/bootstrap.min.js"></script>
         <script src="scripts/vendor/angular.min.js"></script>
-        <script src="scripts/vendor/md5.js"></script>
-        <script src="scripts/vendor/store.min.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js scripts/plugins.js -->
-        <script src="scripts/vendor/bootstrap/bootstrap-affix.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-alert.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-dropdown.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-tooltip.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-modal.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-transition.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-button.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-popover.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-typeahead.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-carousel.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-scrollspy.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-collapse.js"></script>
-        <script src="scripts/vendor/bootstrap/bootstrap-tab.js"></script>
         <script src="scripts/vendor/angular-bootstrap.min.js"></script>
         <script src="scripts/vendor/angular-bootstrap-prettify.min.js"></script>
         <script src="scripts/vendor/angular-cookies.min.js"></script>
@@ -155,24 +138,23 @@
         <script src="scripts/vendor/angular-sanitize.min.js"></script>
         <script src="scripts/vendor/angular-ui.min.js"></script>
         <script src="scripts/vendor/angular-ui-ieshiv.min.js"></script>
-        <!-- endbuild -->
+        <script src="scripts/vendor/md5.js"></script>
 
-        <!-- build:js scripts/main.js -->
-        <script data-main="scripts/main" src="scripts/app.js"></script>
-        <script data-main="scripts/main" src="scripts/controllers/account.js"></script>
-        <script data-main="scripts/main" src="scripts/controllers/finder.js"></script>
-        <script data-main="scripts/main" src="scripts/controllers/ILP.js"></script>
-        <script data-main="scripts/main" src="scripts/controllers/logger.js"></script>
-        <script data-main="scripts/main" src="scripts/controllers/main.js"></script>
-        <script data-main="scripts/main" src="scripts/directives/DOM.js"></script>
-        <script data-main="scripts/main" src="scripts/directives/fadeAfter.js"></script>
-        <script data-main="scripts/main" src="scripts/filters/capitalize.js"></script>
-        <script data-main="scripts/main" src="scripts/filters/reverse.js"></script>
-        <script data-main="scripts/main" src="scripts/services/ILP.js"></script>
-        <script data-main="scripts/main" src="scripts/services/semester.js"></script>
-        <script data-main="scripts/main" src="scripts/services/serv.js"></script>
-        <script data-main="scripts/main" src="scripts/services/student.js"></script>
-        <script data-main="scripts/main" src="scripts/services/user.js"></script>
+        <!-- build:js scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/account.js"></script>
+        <script src="scripts/controllers/finder.js"></script>
+        <script src="scripts/controllers/ILP.js"></script>
+        <script src="scripts/controllers/logger.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/directives/DOM.js"></script>
+        <script src="scripts/directives/fadeAfter.js"></script>
+        <script src="scripts/filters/capitalize.js"></script>
+        <script src="scripts/filters/reverse.js"></script>
+        <script src="scripts/services/ILP.js"></script>
+        <script src="scripts/services/semester.js"></script>
+        <script src="scripts/services/student.js"></script>
+        <script src="scripts/services/user.js"></script>
         <!-- endbuild -->
     </body>
 </html>
