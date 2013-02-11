@@ -2,9 +2,11 @@
 // client: put, get, del
 
 Vision.factory('Serv', function($log, $rootScope) {
+	var host = 'http://mesavalleyvision.org/app.cfm';
+
 	return {
 		del: function(objName, objData) {
-			$http.jsonp('http://mesavalleyvision.org/app.cfm/del/' + objName, objData)
+			$http.jsonp(host + '/del/' + objName, objData)
 			.success(function() {
 				store.remove(objName);
 			})
@@ -18,7 +20,7 @@ Vision.factory('Serv', function($log, $rootScope) {
 			if (thisn)
 				return thisn;
 			else {
-				$http.jsonp('http://mesavalleyvision.org/app.cfm/get/' + objName, objData)
+				$http.jsonp(host + '/get/' + objName, objData)
 				.success(function(data) {
 					store.set(objName, data);
 				})
@@ -31,7 +33,7 @@ Vision.factory('Serv', function($log, $rootScope) {
 			var thisn = store.get(objName),
 				X;
 
-			$http.jsonp('http://mesavalleyvision.org/app.cfm/put/' + objName, objData)
+			$http.jsonp(host + '/put/' + objName, objData)
 			.success(function() {
 				if (thisn)
 					for (X in objData)
